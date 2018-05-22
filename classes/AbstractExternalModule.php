@@ -1075,8 +1075,8 @@ class AbstractExternalModule
 		if (SUPER_USER) {
 			return $link;
 		}
-
-		if (\REDCap::getUserRights(USERID)[USERID]['design']) {
+		
+		if (!is_numeric($pid) || (is_numeric($pid) && defined("PROJECT_ID") && PROJECT_ID == $pid && \REDCap::getUserRights(USERID)[USERID]['design'])) {
 			return $link;
 		}
 
