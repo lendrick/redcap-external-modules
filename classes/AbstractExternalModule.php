@@ -1070,13 +1070,13 @@ class AbstractExternalModule
 		ExternalModules::exitAfterHook();
 	}
 
-	public function redcap_module_link_check_display($link)
+	public function redcap_module_link_check_display($project_id, $link)
 	{
 		if (SUPER_USER) {
 			return $link;
 		}
 		
-		if (!is_numeric($pid) || (is_numeric($pid) && defined("PROJECT_ID") && PROJECT_ID == $pid && \REDCap::getUserRights(USERID)[USERID]['design'])) {
+		if (!empty($project_id) && \REDCap::getUserRights(USERID)[USERID]['design']) {
 			return $link;
 		}
 
